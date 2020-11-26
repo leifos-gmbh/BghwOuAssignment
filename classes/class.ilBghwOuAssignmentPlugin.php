@@ -21,6 +21,8 @@ class ilBghwOuAssignmentPlugin extends ilLDAPPlugin implements ilLDAPRoleAssignm
     const PLUGIN_ID_DIREKTION = 5;
     const PLUGIN_ID_UK = 6;
 
+    const PLUGIN_ID_BGHW = 7;
+
     const PLUGIN_OU_ASSIGNMENTS = [
         self::PLUGIN_ID_PRAEVENTION => [
             'Praevention'
@@ -106,6 +108,10 @@ class ilBghwOuAssignmentPlugin extends ilLDAPPlugin implements ilLDAPRoleAssignm
      */
     private function matches(int $plugin_id, string $dn)  : bool
     {
+        if ($plugin_id == self::PLUGIN_ID_BGHW) {
+            return true;
+        }
+
         $this->logger->debug('Comparing with dn = ' . $dn);
         foreach (self::PLUGIN_OU_ASSIGNMENTS[$plugin_id] as $ou) {
             $this->logger->debug('Comparing with ' . $ou);
