@@ -63,7 +63,7 @@ class ilBghwOuAssignmentPlugin extends ilLDAPPlugin implements ilLDAPRoleAssignm
     {
         global $DIC;
 
-        $this->logger = $DIC->logger()->ldap();
+        $this->logger = $DIC->logger()->auth();
     }
 
     /**
