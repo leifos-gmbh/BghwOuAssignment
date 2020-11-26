@@ -12,7 +12,7 @@ class ilBghwOuAssignmentPlugin extends ilLDAPPlugin implements ilLDAPRoleAssignm
     /**
      * @var string
      */
-    const PLUGIN_NAME = 'ilBghwOuAssignment';
+    const PLUGIN_NAME = 'BghwOuAssignment';
 
     const PLUGIN_ID_PRAEVENTION = 1;
     const PLUGIN_ID_PRODUKTION = 2;
