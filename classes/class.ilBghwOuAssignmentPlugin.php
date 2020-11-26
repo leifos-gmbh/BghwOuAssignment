@@ -84,7 +84,11 @@ class ilBghwOuAssignmentPlugin extends ilLDAPPlugin implements ilLDAPRoleAssignm
             $this->logger->error('Unknown plugin id configure in LDAP role assignment');
             return false;
         }
-
+        if (!isset($a_user_data['dn'])) {
+            $this->logger->warning('No dn provided');
+            return false;
+        }
+        return $this->matches($a_user_data['dn']);
     }
 
     /**
@@ -93,5 +97,23 @@ class ilBghwOuAssignmentPlugin extends ilLDAPPlugin implements ilLDAPRoleAssignm
     public function getAdditionalAttributeNames()
     {
         return [];
+    }
+
+    /**
+     * @param int    $plugin_id
+     * @param string $dn
+     * @return bool
+     */
+    private function matches(int $plugin_id, string $dn)  : bool
+    {
+        $this->logger->debug('Comparing with dn = ' . $dn);
+        foreach (self::PLUGIN_OU_ASSIGNMENTS[$plugin_id] as $ou) {
+            $this->logger->debug('Comparing with ' . $ou);
+            if (stripos($dn, 'OU=' . $ou . ',') !== false) {
+                $this->logger->debug('... matches');
+                return true;
+            }
+        }
+        return false;
     }
 }
