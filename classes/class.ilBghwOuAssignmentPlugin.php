@@ -12,16 +12,16 @@ class ilBghwOuAssignmentPlugin extends ilLDAPPlugin implements ilLDAPRoleAssignm
     /**
      * @var string
      */
-    protected const PLUGIN_NAME = 'ilBghwOuAssignment';
+    const PLUGIN_NAME = 'ilBghwOuAssignment';
 
-    protected const PLUGIN_ID_PRAEVENTION = 1;
-    protected const PLUGIN_ID_PRODUKTION = 2;
-    protected const PLUGIN_ID_ZENTRALE_DIENSTE = 3;
-    protected const PLUGIN_ID_IT = 4;
-    protected const PLUGIN_ID_DIREKTION = 5;
-    protected const PLUGIN_ID_UK = 6;
+    const PLUGIN_ID_PRAEVENTION = 1;
+    const PLUGIN_ID_PRODUKTION = 2;
+    const PLUGIN_ID_ZENTRALE_DIENSTE = 3;
+    const PLUGIN_ID_IT = 4;
+    const PLUGIN_ID_DIREKTION = 5;
+    const PLUGIN_ID_UK = 6;
 
-    protected const PLUGIN_OU_ASSIGNMENTS = [
+    const PLUGIN_OU_ASSIGNMENTS = [
         self::PLUGIN_ID_PRAEVENTION => [
             'Praevention'
         ],
