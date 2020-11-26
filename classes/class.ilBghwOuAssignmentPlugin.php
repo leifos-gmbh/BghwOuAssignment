@@ -88,7 +88,7 @@ class ilBghwOuAssignmentPlugin extends ilLDAPPlugin implements ilLDAPRoleAssignm
             $this->logger->warning('No dn provided');
             return false;
         }
-        return $this->matches($a_user_data['dn']);
+        return $this->matches((int) $a_plugin_id,(string) $a_user_data['dn']);
     }
 
     /**
