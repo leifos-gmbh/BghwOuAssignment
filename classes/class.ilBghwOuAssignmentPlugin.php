@@ -1,6 +1,20 @@
 <?php
+/**
+ * This file is part of ILIAS, a powerful learning management system
+ * published by ILIAS open source e-Learning e.V.
+ *
+ * ILIAS is licensed with the GPL-3.0,
+ * see https://www.gnu.org/licenses/gpl-3.0.en.html
+ * You should have received a copy of said license along with the
+ * source code, too.
+ *
+ * If this is not the case or you just want to try ILIAS, you'll find
+ * us at:
+ * https://www.ilias.de
+ * https://github.com/ILIAS-eLearning
+ *
+ *********************************************************************/
 
-/* Copyright (c) 1998-2010 ILIAS open source, Extended GPL, see docs/LICENSE */
 
 /**
  * LDAP role assignment by ou assignment
@@ -9,9 +23,6 @@
  */
 class ilBghwOuAssignmentPlugin extends ilLDAPPlugin implements ilLDAPRoleAssignmentPlugin
 {
-    /**
-     * @var string
-     */
     const PLUGIN_NAME = 'BghwOuAssignment';
 
     const PLUGIN_ID_PRAEVENTION = 1;
@@ -56,22 +67,20 @@ class ilBghwOuAssignmentPlugin extends ilLDAPPlugin implements ilLDAPRoleAssignm
     /**
      * @var ilLogger
      */
-    protected $logger;
+    protected ?ilLogger $logger = null;
 
-    /**
-     *  Init slot
-     */
-    public function slotInit()
+    public function __construct(ilDBInterface $db, ilComponentRepositoryWrite $component_repository, string $id)
     {
         global $DIC;
 
+        parent::__construct($db, $component_repository, $id);
         $this->logger = $DIC->logger()->auth();
     }
 
     /**
      * @inheritDoc
      */
-    function getPluginName()
+    public function getPluginName(): string
     {
         return self::PLUGIN_NAME;
     }
@@ -79,7 +88,7 @@ class ilBghwOuAssignmentPlugin extends ilLDAPPlugin implements ilLDAPRoleAssignm
     /**
      * @inheritDoc
      */
-    public function checkRoleAssignment($a_plugin_id, $a_user_data)
+    public function checkRoleAssignment(int $a_plugin_id, array $a_user_data): bool
     {
         $this->logger->dump($a_user_data,  ilLogLevel::DEBUG);
         if (!array_key_exists($a_plugin_id, self::PLUGIN_OU_ASSIGNMENTS)) {
@@ -96,7 +105,7 @@ class ilBghwOuAssignmentPlugin extends ilLDAPPlugin implements ilLDAPRoleAssignm
     /**
      * @inheritDoc
      */
-    public function getAdditionalAttributeNames()
+    public function getAdditionalAttributeNames(): array
     {
         return [];
     }
